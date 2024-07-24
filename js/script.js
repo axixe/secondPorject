@@ -27,21 +27,24 @@ const movieDB = {
 const adWrapper = document.querySelector('.promo__adv'),
       ads = adWrapper.querySelectorAll('img'),
       bg = document.querySelector('.promo__bg'),
-      film = document.querySelector('.promo__interactive-list')
-
-movieDB.movies.forEach(item => {
-    film.innerHTML = `
-    <li class="promo__interactive-item">${item}
-        <div class="delete"></div>
-    </li>
-    `;
-})
+      movieList = document.querySelector('.promo__interactive-list');
 
 ads.forEach(item => {
     item.remove();
 })
 
 document.querySelector('.promo__genre').textContent = 'ДРАМА';
-bg.style.background = 'url("../img/bg.jpg") center center/cover no-repeat';
 
-console.log(ads);
+bg.style.background = 'url("../img/bg.jpg")';
+
+movieList.innerHTML = '';
+
+movieDB.movies.sort();
+
+movieDB.movies.forEach((film, i) => {
+    movieList.innerHTML += `
+    <li class="promo__interactive-item">${i + 1}) ${film}
+        <div class="delete"></div>
+    </li>
+    `;
+})
